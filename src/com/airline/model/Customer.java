@@ -1,9 +1,16 @@
+package com.airline.model;
+
+import com.airline.util.RandomGenerator;
+
 import java.util.*;
 
+/**
+ * Represents a customer in the airline reservation system.
+ * This class encapsulates all customer-related data and operations.
+ */
 public class Customer {
 
-    // ************************************************************ Fields
-    // ************************************************************
+    // ************************************************************ Fields ************************************************************
     private final String userID;
     private String email;
     private String name;
@@ -11,15 +18,16 @@ public class Customer {
     private final String password;
     private String address;
     private int age;
-    public List<Flight> flightsRegisteredByUser;
-    public List<Integer> numOfTicketsBookedByUser;
-    public static final List<Customer> customerCollection = User.getCustomersCollection();
+    private List<Flight> flightsRegisteredByUser;
+    private List<Integer> numOfTicketsBookedByUser;
+    private static final List<Customer> customerCollection = new ArrayList<>();
 
-    // ************************************************************
-    // Behaviours/Methods
-    // ************************************************************
+    // ************************************************************ Constructors ************************************************************
 
-    Customer() {
+    /**
+     * Default constructor
+     */
+    public Customer() {
         this.userID = null;
         this.name = null;
         this.email = null;
@@ -40,7 +48,7 @@ public class Customer {
      * @param address  customer's address
      * @param age      customer's age
      */
-    Customer(String name, String email, String password, String phone, String address, int age) {
+    public Customer(String name, String email, String password, String phone, String address, int age) {
         RandomGenerator random = new RandomGenerator();
         random.randomIDGen();
         this.name = name;
@@ -53,6 +61,8 @@ public class Customer {
         this.flightsRegisteredByUser = new ArrayList<>();
         this.numOfTicketsBookedByUser = new ArrayList<>();
     }
+
+    // ************************************************************ Public Methods ************************************************************
 
     /**
      * Takes input for the new customer and adds them to programs memory.
@@ -83,19 +93,6 @@ public class Customer {
         System.out.print("Enter your age :\t");
         int age = read.nextInt();
         customerCollection.add(new Customer(name, email, password, phone, address, age));
-    }
-
-    /**
-     * Returns String consisting of customers data(name, age, email etc...) for
-     * displaying.
-     * randomIDDisplay() adds space between the userID for easy readability.
-     *
-     * @param i for serial numbers.
-     * @return customers data in String
-     */
-    private String toString(int i) {
-        return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i,
-                randomIDDisplay(userID), name, age, email, address, phone);
     }
 
     /**
@@ -130,6 +127,7 @@ public class Customer {
      * Returns true if the given emailID is already registered, false otherwise
      *
      * @param emailID to be checked in the list
+     * @return true if email is already registered, false otherwise
      */
     public boolean isUniqueData(String emailID) {
         boolean isUnique = false;
@@ -142,6 +140,11 @@ public class Customer {
         return isUnique;
     }
 
+    /**
+     * Edits user information based on the provided ID
+     * 
+     * @param ID the ID of the user to edit
+     */
     public void editUserInfo(String ID) {
         boolean isFound = false;
         Scanner read = new Scanner(System.in);
@@ -168,6 +171,11 @@ public class Customer {
         }
     }
 
+    /**
+     * Deletes a user with the specified ID
+     * 
+     * @param ID the ID of the user to delete
+     */
     public void deleteUser(String ID) {
         boolean isFound = false;
         Iterator<Customer> iterator = customerCollection.iterator();
@@ -211,7 +219,7 @@ public class Customer {
     /**
      * Shows the header for printing customers data
      */
-    void displayHeader() {
+    public void displayHeader() {
         System.out.println();
         System.out.printf(
                 "%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n",
@@ -223,7 +231,6 @@ public class Customer {
                 "%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n",
                 "");
         System.out.println();
-
     }
 
     /**
@@ -236,7 +243,7 @@ public class Customer {
      * @param randomID id to add space
      * @return randomID with added space
      */
-    String randomIDDisplay(String randomID) {
+    public String randomIDDisplay(String randomID) {
         StringBuilder newString = new StringBuilder();
         for (int i = 0; i <= randomID.length(); i++) {
             if (i == 3) {
@@ -253,9 +260,8 @@ public class Customer {
      *
      * @param f flight to associate
      */
-    void addNewFlightToCustomerList(Flight f) {
+    public void addNewFlightToCustomerList(Flight f) {
         this.flightsRegisteredByUser.add(f);
-        // numOfFlights++;
     }
 
     /**
@@ -264,66 +270,159 @@ public class Customer {
      * @param index        at which flight is registered in the arraylist
      * @param numOfTickets how many tickets to add
      */
-    void addExistingFlightToCustomerList(int index, int numOfTickets) {
+    public void addExistingFlightToCustomerList(int index, int numOfTickets) {
         int newNumOfTickets = numOfTicketsBookedByUser.get(index) + numOfTickets;
         this.numOfTicketsBookedByUser.set(index, newNumOfTickets);
     }
 
-    // ************************************************************ Setters &
-    // Getters ************************************************************
+    /**
+     * Returns String consisting of customers data(name, age, email etc...) for
+     * displaying.
+     * randomIDDisplay() adds space between the userID for easy readability.
+     *
+     * @param i for serial numbers.
+     * @return customers data in String
+     */
+    private String toString(int i) {
+        return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i,
+                randomIDDisplay(userID), name, age, email, address, phone);
+    }
 
+    // ************************************************************ Static Methods ************************************************************
+
+    /**
+     * Get the collection of all customers
+     * 
+     * @return the list of all customers
+     */
+    public static List<Customer> getCustomerCollection() {
+        return customerCollection;
+    }
+
+    // ************************************************************ Getters and Setters ************************************************************
+
+    /**
+     * Get the list of flights registered by this user
+     * 
+     * @return list of flights
+     */
     public List<Flight> getFlightsRegisteredByUser() {
         return flightsRegisteredByUser;
     }
 
+    /**
+     * Get the user's password
+     * 
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Get the user's phone number
+     * 
+     * @return phone number
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Get the user's address
+     * 
+     * @return address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Get the user's email
+     * 
+     * @return email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Get the user's age
+     * 
+     * @return age
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * Get the user's ID
+     * 
+     * @return user ID
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * Get the user's name
+     * 
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the list of number of tickets booked by user
+     * 
+     * @return list of ticket counts
+     */
     public List<Integer> getNumOfTicketsBookedByUser() {
         return numOfTicketsBookedByUser;
     }
 
+    /**
+     * Set the user's name
+     * 
+     * @param name new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Set the user's email
+     * 
+     * @param email new email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Set the user's phone number
+     * 
+     * @param phone new phone number
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * Set the user's address
+     * 
+     * @param address new address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Set the user's age
+     * 
+     * @param age new age
+     */
     public void setAge(int age) {
         this.age = age;
     }
