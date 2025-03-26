@@ -1,6 +1,6 @@
 package com.airline.controller;
 
-import com.airline.model.Customer;
+import com.airline.model.customer. Customer;
 
 /**
  * Controller class that handles authentication and authorization for the airline reservation system.

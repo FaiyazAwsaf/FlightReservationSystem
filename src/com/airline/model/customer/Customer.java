@@ -1,6 +1,7 @@
-package com.airline.model;
+package com.airline.model.customer;
 
 import com.airline.util.RandomGenerator;
+import com.airline.model.flight.*;
 
 import java.util.*;
 
@@ -142,7 +143,7 @@ public class Customer {
 
     /**
      * Edits user information based on the provided ID
-     * 
+     *
      * @param ID the ID of the user to edit
      */
     public void editUserInfo(String ID) {
@@ -173,7 +174,7 @@ public class Customer {
 
     /**
      * Deletes a user with the specified ID
-     * 
+     *
      * @param ID the ID of the user to delete
      */
     public void deleteUser(String ID) {
@@ -198,7 +199,7 @@ public class Customer {
 
     /**
      * Shows the customers' data in formatted way.
-     * 
+     *
      * @param showHeader to check if we want to print ascii art for the customers'
      *                   data.
      */
@@ -266,7 +267,7 @@ public class Customer {
 
     /**
      * Adds numOfTickets to already booked flights
-     * 
+     *
      * @param index        at which flight is registered in the arraylist
      * @param numOfTickets how many tickets to add
      */
@@ -292,7 +293,7 @@ public class Customer {
 
     /**
      * Get the collection of all customers
-     * 
+     *
      * @return the list of all customers
      */
     public static List<Customer> getCustomerCollection() {
@@ -303,7 +304,7 @@ public class Customer {
 
     /**
      * Get the list of flights registered by this user
-     * 
+     *
      * @return list of flights
      */
     public List<Flight> getFlightsRegisteredByUser() {
@@ -312,7 +313,7 @@ public class Customer {
 
     /**
      * Get the user's password
-     * 
+     *
      * @return password
      */
     public String getPassword() {
@@ -321,7 +322,7 @@ public class Customer {
 
     /**
      * Get the user's phone number
-     * 
+     *
      * @return phone number
      */
     public String getPhone() {
@@ -330,7 +331,7 @@ public class Customer {
 
     /**
      * Get the user's address
-     * 
+     *
      * @return address
      */
     public String getAddress() {
@@ -339,7 +340,7 @@ public class Customer {
 
     /**
      * Get the user's email
-     * 
+     *
      * @return email
      */
     public String getEmail() {
@@ -348,7 +349,7 @@ public class Customer {
 
     /**
      * Get the user's age
-     * 
+     *
      * @return age
      */
     public int getAge() {
@@ -357,7 +358,7 @@ public class Customer {
 
     /**
      * Get the user's ID
-     * 
+     *
      * @return user ID
      */
     public String getUserID() {
@@ -366,7 +367,7 @@ public class Customer {
 
     /**
      * Get the user's name
-     * 
+     *
      * @return name
      */
     public String getName() {
@@ -375,7 +376,7 @@ public class Customer {
 
     /**
      * Get the list of number of tickets booked by user
-     * 
+     *
      * @return list of ticket counts
      */
     public List<Integer> getNumOfTicketsBookedByUser() {
@@ -384,7 +385,7 @@ public class Customer {
 
     /**
      * Set the user's name
-     * 
+     *
      * @param name new name
      */
     public void setName(String name) {
@@ -393,7 +394,7 @@ public class Customer {
 
     /**
      * Set the user's email
-     * 
+     *
      * @param email new email
      */
     public void setEmail(String email) {
@@ -402,7 +403,7 @@ public class Customer {
 
     /**
      * Set the user's phone number
-     * 
+     *
      * @param phone new phone number
      */
     public void setPhone(String phone) {
@@ -411,7 +412,7 @@ public class Customer {
 
     /**
      * Set the user's address
-     * 
+     *
      * @param address new address
      */
     public void setAddress(String address) {
@@ -420,7 +421,7 @@ public class Customer {
 
     /**
      * Set the user's age
-     * 
+     *
      * @param age new age
      */
     public void setAge(int age) {

@@ -2,8 +2,8 @@ package com.airline.view;
 
 import com.airline.controller.FlightReservation;
 import com.airline.controller.RolesAndPermissions;
-import com.airline.model.Customer;
-import com.airline.model.Flight;
+import com.airline.model.customer.Customer;
+import com.airline.model.flight.*;
 
 import java.util.ArrayList;
 import java.util.List;

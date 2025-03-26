@@ -1,6 +1,9 @@
 package com.airline.model;
 
 import java.util.List;
+import com.airline.model.customer.Customer;
+import com.airline.model.flight.*;
+
 
 /**
  * Interface defining display operations for flight and customer data.

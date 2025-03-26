@@ -1,8 +1,8 @@
 package com.airline.controller;
 
-import com.airline.model.Customer;
+import com.airline.model.customer.Customer;
 import com.airline.model.DisplayClass;
-import com.airline.model.Flight;
+import com.airline.model.flight.*;
 
 import java.util.Iterator;
 import java.util.List;
