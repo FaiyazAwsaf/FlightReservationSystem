@@ -247,4 +247,110 @@ public class Flight extends FlightDistance {
     public String getFlightSchedule() {
         return flightSchedule;
     }
+
+    /**
+     * Get the origin city of the flight
+     *
+     * @return the origin city
+     */
+    public String getFromWhichCity() {
+        return fromWhichCity;
+    }
+
+    /**
+     * Get the destination city of the flight
+     *
+     * @return the destination city
+     */
+    public String getToWhichCity() {
+        return toWhichCity;
+    }
+
+    /**
+     * Get the gate number
+     *
+     * @return the gate number
+     */
+    public String getGate() {
+        return gate;
+    }
+
+    /**
+     * Get the flight time
+     *
+     * @return the flight time
+     */
+    public String getFlightTime() {
+        return flightTime;
+    }
+    
+    /**
+     * Calculate and return the arrival time based on departure time and flight duration
+     *
+     * @return formatted arrival time string
+     */
+    public String fetchArrivalTime() {
+        try {
+            // Parse the departure time
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime departureDateTime = LocalDateTime.parse(flightSchedule, formatter);
+            
+            // Parse the flight time to get hours and minutes
+            String[] parts = flightTime.split(" ");
+            int hours = Integer.parseInt(parts[0]);
+            int minutes = Integer.parseInt(parts[2]);
+            
+            // Calculate arrival time by adding flight duration to departure time
+            LocalDateTime arrivalDateTime = departureDateTime.plusHours(hours).plusMinutes(minutes);
+            
+            // Format and return the arrival time
+            return arrivalDateTime.format(formatter);
+        } catch (Exception e) {
+            // Return a placeholder if there's an error in calculation
+            return "Time not available";
+        }
+    }
+
+    /**
+     * Displays the flight schedule with all available flights
+     * This method prints a formatted table of all flights with their details
+     */
+    public void displayFlightSchedule() {
+        System.out.println("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tFLIGHT SCHEDULE");
+        System.out.println("\t\t+----------+------------+------------+----------------------+----------------------+-----------------+----------------------+------------+-----------------+------------+");
+        System.out.println("\t\t|   S.No   |  Flight No |   Origin   |     Destination      |    Departure Time    |  Arrival Time   |     Flight Time      |    Seats   |     Distance    |    Gate    |");
+        System.out.println("\t\t+----------+------------+------------+----------------------+----------------------+-----------------+----------------------+------------+-----------------+------------+");
+        
+        if (flightList.isEmpty()) {
+            System.out.println("\t\t|                                                       No flights available                                                                  |");
+        } else {
+            for (int i = 0; i < flightList.size(); i++) {
+                Flight flight = flightList.get(i);
+                System.out.println("\t\t" + flight.toString(i));
+            }
+        }
+        
+        System.out.println("\t\t+----------+------------+------------+----------------------+----------------------+-----------------+----------------------+------------+-----------------+------------+");
+    }
+    
+    /**
+     * Deletes a flight with the specified flight number
+     *
+     * @param flightNumber the flight number to delete
+     */
+    public void deleteFlight(String flightNumber) {
+        boolean found = false;
+        for (int i = 0; i < flightList.size(); i++) {
+            if (flightList.get(i).getFlightNumber().equals(flightNumber)) {
+                flightList.remove(i);
+                found = true;
+                System.out.println("Flight " + flightNumber + " has been deleted successfully.");
+                break;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("Flight " + flightNumber + " not found.");
+        }
+    }
 }
